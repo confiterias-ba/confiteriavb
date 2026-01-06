@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Gourmet | Villa Ballester</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --cafe-profundo: #2c1e1a;
+            --cafe-suave: #6f4e37;
+            --crema: #fdfaf5;
+            --texto: #3d3d3d;
+        }
+
+        body { font-family: 'Georgia', serif; margin: 0; color: var(--texto); background-color: #fff; line-height: 1.6; scroll-behavior: smooth; }
+
+        /* Banner Superior con la imagen de Italia, Libros y Café */
+        .hero {
+            height: 450px;
+            background: url('img/presentacion.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 5px solid var(--cafe-profundo);
+        }
+
+        .hero h1 { display: none; }
+
+        section { padding: 60px 20px; max-width: 1000px; margin: auto; }
+        h2 { text-align: center; color: var(--cafe-profundo); font-variant: small-caps; letter-spacing: 2px; margin-bottom: 30px; }
+
+        /* Acerca de */
+        .acerca { text-align: center; background-color: var(--crema); border-radius: 15px; margin-top: -40px; position: relative; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 40px; }
+        .acerca p { max-width: 800px; margin: auto; font-size: 1.1rem; }
+
+        /* Especialidades */
+        .grid-especialidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card { text-align: center; border: 1px solid #eee; padding: 15px; border-radius: 10px; transition: 0.3s; background: #fff; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+        .card h3 { color: var(--cafe-suave); margin-top: 15px; }
+
+        /* Mapa y Contacto */
+        .mapa-contenedor { width: 100%; height: 350px; border-radius: 15px; overflow: hidden; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .contacto { background: var(--cafe-profundo); color: white; text-align: center; border-radius: 15px 15px 0 0; margin-top: 40px; }
+        .redes a { color: #d7ccc8; font-size: 2.5rem; margin: 0 20px; text-decoration: none; transition: 0.3s; }
+        .redes a:hover { color: white; }
+        
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; background: #1a110f; color: #888; }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Café Gourmet</h1>
+    </header>
+
+    <section id="acerca" class="acerca">
+        <h2>Acerca de Café</h2>
+        <p>Café Gourmet es un rincón cálido nacido en el corazón de Villa Ballester. Inspirados en la tradición europea y el amor por los libros, creamos un espacio donde el aroma del café recién molido se mezcla con la calidez de lo casero. Somos el refugio ideal para una pausa necesaria, una charla entre amigos o un momento de lectura placentero.</p>
+    </section>
+
+    <section id="especialidades">
+        <h2>Nuestras Especialidades</h2>
+        <div class="grid-especialidades">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=600" alt="Tortas Artesanales">
+                <h3>Tortas</h3>
+                <p>Variedad de tortas artesanales preparadas con ingredientes de primera calidad.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600" alt="Masas Finas">
+                <h3>Masas</h3>
+                <p>Delicadas masas finas y secas, ideales para acompañar tu café o regalar.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600" alt="Facturas y Medialunas">
+                <h3>Facturas y Medialunas</h3>
+                <p>Las clásicas medialunas de manteca y facturas variadas horneadas cada día.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion">
+        <h2>Vení a visitarnos</h2>
+        <p style="text-align: center;"><i class="fas fa-map-marker-alt"></i> Prof. F. Agüer 5044, Villa Ballester</p>
+        <div class="mapa-contenedor">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.038162232145!2d-58.5539458!3d-34.5525542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbbf9249b0985%3A0xe880eb0ca74e2668!2sStart%20Caf%C3%A9%20Gourmet!5e0!3m2!1ses!2sar!4v1700000000000" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <h2>Contacto & Horarios</h2>
+        <div class="redes">
+            <a href="https://m.facebook.com/CafeGourmet/?locale2=es_LA" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/tu_numero" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div style="margin-top: 20px;">
+            <p><strong>Nuestros Horarios:</strong></p>
+            <p>Lunes a Viernes: 07:00 a 20:00</p>
+            <p>Sábados: 08:00 a 20:00 | Domingos: 09:00 a 20:00</p>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Café Gourmet - Villa Ballester, Buenos Aires.
+    </footer>
+
+</body>
+</html>
