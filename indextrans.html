@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MALAGA TRANS | Mudanzas & Portes Express</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET DE BOX-SIZING PARA EVITAR DESFASES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --amarillo-vial: #ffcc00;
+            --azul-corporativo: #0a192f;
+            --rojo-urgencia: #e63946;
+            --blanco: #ffffff;
+            --gris-claro: #f4f4f4;
+            --negro: #111111;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            color: var(--negro); 
+            background-color: var(--blanco);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Evita scroll horizontal accidental */
+        }
+
+        h1, h2, h3, .label { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+
+        /* Hero */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), url('img/hero_transporte.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content { max-width: 800px; padding: 20px; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; }
+        .hero-content h1 span { color: var(--amarillo-vial); }
+        .hero-content p { font-size: 1.4rem; margin: 20px 0; font-weight: 300; }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--amarillo-vial);
+            color: var(--negro);
+            padding: 18px 35px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover { background: var(--blanco); transform: translateY(-3px); }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--azul-corporativo);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 30px 10px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item { text-align: center; flex: 1; min-width: 150px; }
+        .stat-item i { color: var(--amarillo-vial); font-size: 2rem; margin-bottom: 10px; }
+        .stat-item div { font-weight: bold; font-size: 1.1rem; }
+
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        h2::after {
+            content: ""; display: block; width: 80px; height: 5px;
+            background: var(--amarillo-vial); margin: 15px auto;
+        }
+
+        /* Acerca */
+        #acerca { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .acerca-img img { width: 100%; border-radius: 8px; display: block; }
+        .acerca-texto p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
+
+        /* SLIDER OPTIMIZADO PARA ANDROID */
+        .slider-container { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 8px; 
+            width: 100%;
+            touch-action: pan-y; /* Mejora el scroll en móviles */
+        }
+
+        .slider { 
+            display: flex; 
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+            width: 100%;
+            will-change: transform;
+        }
+
+        .especialidad-item {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0; /* IMPORTANTE: Evita que Android comprima el slide */
+            height: 450px;
+            position: relative;
+        }
+        
+        .especialidad-item img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            display: block;
+        }
+
+        .especialidad-item .label {
+            position: absolute; top: 30px; left: 30px;
+            background: var(--amarillo-vial);
+            color: var(--negro);
+            padding: 15px 25px; 
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 5px 5px 0 var(--azul-corporativo);
+            z-index: 2;
+        }
+
+        .slider-nav {
+            position: absolute; bottom: 20px; width: 100%;
+            display: flex; justify-content: center; gap: 20px;
+            z-index: 3;
+        }
+
+        .slider-button {
+            background: var(--azul-corporativo); color: white; border: none;
+            width: 45px; height: 45px; cursor: pointer; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Ubicación */
+        .grid-sucursales {
+            display: grid; grid-template-columns: 1fr 1fr;
+            background: var(--gris-claro); border-radius: 12px; overflow: hidden;
+        }
+        .sucursal-info { padding: 40px; }
+        .sucursal-info p { margin: 15px 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        .mapa-container { height: 400px; }
+
+        /* WhatsApp */
+        .wsp {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25d366; color: white;
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        footer { background: var(--azul-corporativo); color: white; padding: 40px 20px; text-align: center; }
+
+        @media (max-width: 768px) {
+            #acerca, .grid-sucursales { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .especialidad-item { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/34600000000?text=Hola!%20Vengo%20de%20la%20web%20y%20necesito%20presupuesto." class="wsp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>MUDANZAS <span>MÁLAGA</span><br>EXPRESS</h1>
+            <p>Tu carga segura, nuestro compromiso total.</p>
+            <a href="#ubicacion" class="cta-button">PRESUPUESTO INMEDIATO</a>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item"><i class="fas fa-truck-fast"></i><div>PORTES 24H</div></div>
+        <div class="stat-item"><i class="fas fa-shield-halved"></i><div>CARGA ASEGURADA</div></div>
+        <div class="stat-item"><i class="fas fa-location-dot"></i><div>TODA ESPAÑA</div></div>
+    </div>
+
+    <section id="acerca">
+        <div class="acerca-img">
+            <img src="img/furgon-malaga.jpg" alt="Transportes Málaga">
+        </div>
+        <div class="acerca-texto">
+            <h2>Rapidez Garantizada</h2>
+            <p>En <strong>Malaga Trans</strong> nos especializamos en soluciones de transporte eficiente para particulares y empresas.</p>
+            <p>Olvídate del estrés. Nos encargamos de todo el proceso logístico para que tu mudanza sea rápida, segura y al mejor precio del mercado.</p>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <h2>Nuestras Especialidades</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="especialidad-item">
+                    <img src="img/mudanza-hogar.jpg" alt="Mudanzas">
+                    <div class="label">MUDANZAS DE HOGAR</div>
+                </div>
+                <div class="especialidad-item">
+                    <img src="img/portes-urgentes.jpg" alt="Portes">
+                    <div class="label">PORTES EXPRESS</div>
+                </div>
+                <div class="especialidad-item">
+                    <img src="img/transporte-nacional.jpg" alt="Nacional">
+                    <div class="label">RUTAS NACIONALES</div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-button prev" aria-label="Anterior"><i class="fas fa-arrow-left"></i></button>
+                <button class="slider-button next" aria-label="Siguiente"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion">
+        <div class="grid-sucursales">
+            <div class="sucursal-info">
+                <h3>CONTACTO DIRECTO</h3>
+                <p><i class="fas fa-phone"></i> +34 600 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@malagatrans.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Polígono Sta. Bárbara, Málaga</p>
+                <br>
+                <a href="tel:+34600000000" class="cta-button" style="display:block; text-align:center;">LLAMAR AHORA</a>
+            </div>
+            <div class="mapa-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51156.51659220054!2d-4.46460675!3d36.7212735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7259c44fdb212d%3A0x6025dc0c418624!2zTcOhbGFnYSwgRXNwYcOxYQ!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 MALAGA TRANS | Expertos en Logística Express.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.slider');
+            const items = document.querySelectorAll('.especialidad-item');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            let currentIndex = 0;
+
+            function updateSlider() {
+                // Parche para Android: Usamos el ancho exacto del contenedor en píxeles
+                const width = slider.offsetWidth;
+                slider.style.transform = `translateX(${-currentIndex * width}px)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateSlider();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateSlider();
+            });
+
+            // Ajustar el slider si el usuario rota el móvil o cambia el tamaño de ventana
+            window.addEventListener('resize', updateSlider);
+            
+            // Auto-play suave cada 5 segundos
+            setInterval(() => {
+                nextButton.click();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
