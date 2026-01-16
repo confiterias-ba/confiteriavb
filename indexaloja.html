@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabañas La Cumbrecita | Relax en las Sierras</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --verde-bosque: #2d4a22;
+            --marron-madera: #6d4c41;
+            --ocre-suave: #d4a373;
+            --blanco: #ffffff;
+            --gris-piedra: #f8f9fa;
+            --negro: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            color: var(--negro); 
+            background-color: var(--blanco);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .label { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+
+        /* Hero */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1920') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content { max-width: 800px; padding: 20px; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; }
+        .hero-content h1 span { color: var(--ocre-suave); }
+        .hero-content p { font-size: 1.4rem; margin: 20px 0; font-weight: 300; }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--verde-bosque);
+            color: white;
+            padding: 18px 35px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(45, 74, 34, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover { background: var(--marron-madera); transform: translateY(-3px); }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--marron-madera);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 30px 10px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item { text-align: center; flex: 1; min-width: 150px; }
+        .stat-item i { color: var(--ocre-suave); font-size: 2rem; margin-bottom: 10px; }
+        .stat-item div { font-weight: bold; font-size: 1.1rem; }
+
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        h2::after {
+            content: ""; display: block; width: 80px; height: 5px;
+            background: var(--verde-bosque); margin: 15px auto;
+        }
+
+        /* Acerca */
+        #acerca { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .acerca-img img { width: 100%; border-radius: 15px; display: block; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .acerca-texto p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
+
+        /* Slider */
+        .slider-container { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 12px; 
+            width: 100%;
+            touch-action: pan-y;
+        }
+
+        .slider { 
+            display: flex; 
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+            width: 100%;
+            will-change: transform;
+        }
+
+        .especialidad-item {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+            height: 500px;
+            position: relative;
+        }
+        
+        .especialidad-item img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            display: block;
+        }
+
+        .especialidad-item .label {
+            position: absolute; top: 30px; left: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--verde-bosque);
+            padding: 15px 25px; 
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-left: 5px solid var(--verde-bosque);
+            z-index: 2;
+        }
+
+        .slider-nav {
+            position: absolute; bottom: 20px; width: 100%;
+            display: flex; justify-content: center; gap: 20px;
+            z-index: 3;
+        }
+
+        .slider-button {
+            background: var(--verde-bosque); color: white; border: none;
+            width: 45px; height: 45px; cursor: pointer; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Ubicación */
+        .grid-sucursales {
+            display: grid; grid-template-columns: 1fr 1fr;
+            background: var(--gris-piedra); border-radius: 12px; overflow: hidden;
+        }
+        .sucursal-info { padding: 40px; }
+        .sucursal-info p { margin: 15px 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        .mapa-container { height: 400px; }
+
+        /* WhatsApp */
+        .wsp {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25d366; color: white;
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        footer { background: var(--verde-bosque); color: white; padding: 40px 20px; text-align: center; }
+
+        @media (max-width: 768px) {
+            #acerca, .grid-sucursales { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .especialidad-item { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/5491130139532?text=Hola!%20Quisiera%20consultar%20disponibilidad%20para%20las%20cabañas." class="wsp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>LA CUMBRECITA <span>VIVE</span><br>EL PARAÍSO</h1>
+            <p>Cabañas exclusivas en el corazón de las sierras de Córdoba.</p>
+            <a href="#ubicacion" class="cta-button">RESERVAR AHORA</a>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item"><i class="fas fa-wifi"></i><div>WI-FI LIBRE</div></div>
+        <div class="stat-item"><i class="fas fa-mug-hot"></i><div>DESAYUNO SECO</div></div>
+        <div class="stat-item"><i class="fas fa-paw"></i><div>PET FRIENDLY</div></div>
+    </div>
+
+    <section id="acerca">
+        <div class="acerca-img">
+            <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&q=80&w=800" alt="Cabañas en la Cumbrecita">
+        </div>
+        <div class="acerca-texto">
+            <h2>Desconexión Total</h2>
+            <p>Descubrí la magia de <strong>La Cumbrecita</strong>, el único pueblo peatonal de Argentina. Nuestras cabañas ofrecen el equilibrio perfecto entre confort rústico y naturaleza virgen.</p>
+            <p>Disfrutá de vistas panorámicas, arroyos cristalinos y el aire puro de las Sierras Grandes de Córdoba en un entorno inolvidable.</p>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <h2>Nuestros Espacios</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="especialidad-item">
+                    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=1200" alt="Cabaña Familiar">
+                    <div class="label">CABAÑAS FAMILIARES</div>
+                </div>
+                <div class="especialidad-item">
+                    <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=1200" alt="Suite Parejas">
+                    <div class="label">SUITES PARA PAREJAS</div>
+                </div>
+                <div class="especialidad-item">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1200" alt="Vistas">
+                    <div class="label">VISTAS PANORÁMICAS</div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-button prev" aria-label="Anterior"><i class="fas fa-arrow-left"></i></button>
+                <button class="slider-button next" aria-label="Siguiente"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion">
+        <div class="grid-sucursales">
+            <div class="sucursal-info">
+                <h3>CONTACTO Y RESERVAS</h3>
+                <p><i class="fas fa-phone"></i> (54) 11 3013 9532</p>
+                <p><i class="fas fa-envelope"></i> reservas@lacumbrecita.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> La Cumbrecita, Córdoba, Argentina</p>
+                <br>
+                <a href="https://wa.me/5491130139532" class="cta-button" style="display:block; text-align:center;">CONSULTAR POR WHATSAPP</a>
+            </div>
+            <div class="mapa-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13541.35467464016!2d-64.781895!3d-31.898858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d40e11c5f854b%3A0x6e2697b0a70868!2sLa%20Cumbrecita%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>LogicBot | © 2026 Cabañas La Cumbrecita. Todos los derechos reservados.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">Desarrollado por <a href="https://logicbotok.github.io/logicbot/" style="color: white;">LogicBot</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.slider');
+            const items = document.querySelectorAll('.especialidad-item');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            let currentIndex = 0;
+
+            function updateSlider() {
+                const width = slider.offsetWidth;
+                slider.style.transform = `translateX(${-currentIndex * width}px)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateSlider();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateSlider();
+            });
+
+            window.addEventListener('resize', updateSlider);
+            
+            setInterval(() => {
+                nextButton.click();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
